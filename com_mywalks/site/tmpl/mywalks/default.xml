@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+	<layout title="COM_MYWALKS_MYWALKS_VIEW_DEFAULT_TITLE" option="COM_MYWALKS_MYWALKS_VIEW_DEFAULT_OPTION">
+		<help
+			key="JHELP_MENUS_MENU_ITEM_MYWALKS"
+		/>
+		<message>
+			<![CDATA[COM_MYWALKS_MYWALKS_VIEW_DEFAULT_DESC]]>
+		</message>
+	</layout>
+
+	<!-- Add fields to the parameters object for the layout. -->
+		<fields name="params">
+		<fieldset name="request" label="COM_MENUS_BASIC_FIELDSET_LABEL">
+
+		</fieldset>
+
+		<!-- Add fields to the parameters object for the layout. -->
+
+		<!-- Scroll. -->
+		<fieldset name="basic">
+
+		</fieldset>
+
+		<!-- Advanced options. -->
+		<fieldset name="advanced">
+
+		</fieldset>
+	</fields>
+</metadata>

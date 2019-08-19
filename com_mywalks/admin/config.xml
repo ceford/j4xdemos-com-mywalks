@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset
+		name="list_default_parameters"
+		label="JGLOBAL_LIST_LAYOUT_OPTIONS"
+		description="COM_MYWALKS_CONFIG_LIST_SETTINGS_DESC"
+		addfieldprefix="Joomla\Component\Content\Administrator\Field"
+	>
+
+		<field
+			name="show_pagination_limit"
+			type="radio"
+			label="JGLOBAL_DISPLAY_SELECT_LABEL"
+			class="switcher"
+			default="1"
+			>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+
+		<field
+			name="filter_field"
+			type="list"
+			label="JGLOBAL_FILTER_FIELD_LABEL"
+			default="hide"
+			>
+			<option value="hide">JHIDE</option>
+			<option value="title">JGLOBAL_TITLE</option>
+			<option value="author">JAUTHOR</option>
+			<option value="hits">JGLOBAL_HITS</option>
+			<option value="tag">JTAG</option>
+			<option value="month">JMONTH_PUBLISHED</option>
+		</field>
+
+		<field
+			name="show_headings"
+			type="radio"
+			label="JGLOBAL_SHOW_HEADINGS_LABEL"
+			class="switcher"
+			default="1"
+			>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+
+	</fieldset>
+
+	<fieldset
+		name="shared"
+		label="COM_MYWALKS_SHARED_LABEL"
+		description="COM_MYWALKS_SHARED_DESC"
+	>
+
+		<field
+			name="show_pagination"
+			type="list"
+			label="JGLOBAL_PAGINATION_LABEL"
+			default="2"
+			>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+			<option value="2">JGLOBAL_AUTO</option>
+		</field>
+
+		<field
+			name="show_pagination_results"
+			type="radio"
+			label="JGLOBAL_PAGINATION_RESULTS_LABEL"
+			class="switcher"
+			default="1"
+			showon="show_pagination:1,2"
+			>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+
+	</fieldset>
+
+	<fieldset
+		name="integration"
+		label="JGLOBAL_INTEGRATION_LABEL"
+		description="COM_MYWALKS_CONFIG_INTEGRATION_SETTINGS_DESC"
+	>
+
+		<field
+			name="integration_sef"
+			type="note"
+			label="JGLOBAL_SEF_TITLE"
+		/>
+
+		<field
+			name="sef_ids"
+			type="radio"
+			class="switcher"
+			default="0"
+			label="JGLOBAL_SEF_NOIDS_LABEL"
+			filter="integer"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+	</fieldset>
+
+	<fieldset
+		name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC"
+	>
+		<field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			validate="rules"
+			filter="rules"
+			component="com_mywalks"
+			section="component"
+		/>
+	</fieldset>
+</config>
