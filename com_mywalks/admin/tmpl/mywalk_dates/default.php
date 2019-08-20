@@ -14,7 +14,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
-use Joomla\Component\Mywalks\Administrator\Helper\MywalksHelper;
+use J4xdemos\Component\Mywalks\Administrator\Helper\MywalksHelper;
 
 HTMLHelper::_('behavior.multiselect');
 HTMLHelper::_('behavior.tabstate');

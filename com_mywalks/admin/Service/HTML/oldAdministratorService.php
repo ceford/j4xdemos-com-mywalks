@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\Component\Mywalks\Administrator\Service\HTML;
+namespace J4xdemos\Component\Mywalks\Administrator\Service\HTML;
 
 defined('_JEXEC') or die;
 

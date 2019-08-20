@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\Component\Mywalks\Administrator\Table;
+namespace J4xdemos\Component\Mywalks\Administrator\Table;
 
 defined('JPATH_PLATFORM') or die;
 

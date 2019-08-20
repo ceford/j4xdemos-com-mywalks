@@ -20,7 +20,7 @@ use Joomla\CMS\Extension\Service\Provider\MVCFactory;
 use Joomla\CMS\Extension\Service\Provider\RouterFactory;
 use Joomla\CMS\HTML\Registry;
 use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
-use Joomla\Component\Mywalks\Administrator\Extension\MywalksComponent;
+use J4xdemos\Component\Mywalks\Administrator\Extension\MywalksComponent;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 
@@ -42,10 +42,10 @@ return new class implements ServiceProviderInterface
 	 */
 	public function register(Container $container)
 	{
-		$container->registerServiceProvider(new CategoryFactory('\\Joomla\\Component\\Mywalks'));
-		$container->registerServiceProvider(new MVCFactory('\\Joomla\\Component\\Mywalks'));
-		$container->registerServiceProvider(new ComponentDispatcherFactory('\\Joomla\\Component\\Mywalks'));
-		$container->registerServiceProvider(new RouterFactory('\\Joomla\\Component\\Mywalks'));
+		$container->registerServiceProvider(new CategoryFactory('\\J4xdemos\\Component\\Mywalks'));
+		$container->registerServiceProvider(new MVCFactory('\\J4xdemos\\Component\\Mywalks'));
+		$container->registerServiceProvider(new ComponentDispatcherFactory('\\J4xdemos\\Component\\Mywalks'));
+		$container->registerServiceProvider(new RouterFactory('\\J4xdemos\\Component\\Mywalks'));
 		$container->set(
 				ComponentInterface::class,
 				function (Container $container)

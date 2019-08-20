@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace Joomla\Component\Mywalks\Administrator\Model;
+namespace J4xdemos\Component\Mywalks\Administrator\Model;
 
 defined('_JEXEC') or die;
 
@@ -24,7 +24,7 @@ use Joomla\CMS\Table\Table;
 use Joomla\CMS\Table\TableInterface;
 //use Joomla\CMS\UCM\UCMType;
 //use Joomla\CMS\Workflow\Workflow;
-use Joomla\Component\Mywalks\Administrator\Extension\MywalksComponent;
+use J4xdemos\Component\Mywalks\Administrator\Extension\MywalksComponent;
 //use Joomla\Component\Content\Administrator\Helper\ContentHelper;
 //use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
 //use Joomla\Component\Workflow\Administrator\Table\StageTable;
