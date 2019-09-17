@@ -11,16 +11,14 @@ namespace J4xdemos\Component\Mywalks\Administrator\Controller;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\MVC\Controller\BaseController;
-use Joomla\CMS\Router\Route;
+use Joomla\CMS\MVC\Controller\AdminController;
 
 /**
  * Component Controller
  *
  * @since  1.5
  */
-class Mywalk_datesController extends BaseController
+class Mywalk_datesController extends AdminController
 {
 	/**
 	 * The default view.
@@ -57,5 +55,21 @@ class Mywalk_datesController extends BaseController
 		}
 
 		return parent::display();
+	}
+
+	/**
+	 * Proxy for getModel.
+	 *
+	 * @param   string  $name    The model name. Optional.
+	 * @param   string  $prefix  The class prefix. Optional.
+	 * @param   array   $config  The array of possible config values. Optional.
+	 *
+	 * @return  \Joomla\CMS\MVC\Model\BaseDatabaseModel
+	 *
+	 * @since   1.6
+	 */
+	public function getModel($name = 'Mywalk_date', $prefix = 'Administrator', $config = array('ignore_request' => true))
+	{
+		return parent::getModel($name, $prefix, $config);
 	}
 }

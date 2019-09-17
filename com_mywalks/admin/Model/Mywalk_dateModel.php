@@ -90,20 +90,6 @@ class Mywalk_dateModel extends AdminModel
 	}
 
 	/**
-	 * Prepare and sanitise the table data prior to saving.
-	 *
-	 * @param   \Joomla\CMS\Table\Table  $table  A Table object.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.6
-	 */
-	protected function prepareTable($table)
-	{
-
-	}
-
-	/**
 	 * Method to get a table object, load it if necessary.
 	 *
 	 * @param   string  $name     The table name. Optional.
@@ -138,54 +124,19 @@ class Mywalk_dateModel extends AdminModel
 	 *
 	 * @since   4.0.0
 	 */
-	public function publish(&$pks, $value = 1)
-	{
-		$input = Factory::getApplication()->input;
-
-		$user = Factory::getUser();
-		$table = $this->getTable();
-		$pks = (array) $pks;
-
+	public function publish(&$pks, $value = 1) {
+		/* this is a very simple method to change the state of each item selected */
 		$db = $this->getDbo();
 
 		$query = $db->getQuery(true);
 
-		// Access checks.
-		foreach ($pks as $i => $pk)
-		{
-			$table->reset();
-
-			if ($table->load($pk))
-			{
-				if (!isset($items[$pk]))
-				{
-					// Prune items that you can't change.
-					unset($pks[$i]);
-
-					Log::add(Text::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'), Log::WARNING, 'jerror');
-
-					return false;
-				}
-			}
-		}
-
-		// Clear the component's cache
-		$this->cleanCache();
-
-		return true;
+		$query->update('`#__mywalk_dates`');
+		$query->set('state = ' . $value);
+		$query->where('id IN (' . implode(',', $pks). ')');
+		$db->setQuery($query);
+		$db->execute();
 	}
 
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param   integer  $pk  The id of the primary key.
-	 *
-	 * @return  mixed  Object on success, false on failure.
-	 */
-	public function getItem($pk = null)
-	{
-		return parent::getItem($pk);
-	}
 
 	/**
 	 * Method to get the record form.
@@ -233,78 +184,5 @@ class Mywalk_dateModel extends AdminModel
 		$this->preprocessData('com_mywalks.mywalk_date', $data);
 
 		return $data;
-	}
-
-	/**
-	 * Method to validate the form data.
-	 *
-	 * @param   Form    $form   The form to validate against.
-	 * @param   array   $data   The data to validate.
-	 * @param   string  $group  The name of the field group to validate.
-	 *
-	 * @return  array|boolean  Array of filtered data if valid, false otherwise.
-	 *
-	 * @see     JFormRule
-	 * @see     JFilterInput
-	 * @since   3.7.0
-	 */
-	public function validate($form, $data, $group = null)
-	{
-		return parent::validate($form, $data, $group);
-	}
-
-	/**
-	 * Method to save the form data.
-	 *
-	 * @param   array  $data  The form data.
-	 *
-	 * @return  boolean  True on success.
-	 *
-	 * @since   1.6
-	 */
-	public function save($data)
-	{
-		$input  = Factory::getApplication()->input;
-		$filter = \JFilterInput::getInstance();
-		$db     = $this->getDbo();
-		$user	= Factory::getUser();
-
-		if (parent::save($data))
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Allows preprocessing of the Form object.
-	 *
-	 * @param   Form    $form   The form object
-	 * @param   array   $data   The data to be merged into the form object
-	 * @param   string  $group  The plugin group to be executed
-	 *
-	 * @return  void
-	 *
-	 * @since   3.0
-	 */
-	protected function preprocessForm(Form $form, $data, $group = 'content')
-	{
-		parent::preprocessForm($form, $data, $group);
-	}
-
-	/**
-	 * Custom clean the cache of com_mywalks
-	 *
-	 * @param   string   $group      The cache group
-	 * @param   integer  $client_id  The ID of the client
-	 *
-	 * @return  void
-	 *
-	 * @since   1.6
-	 */
-	protected function cleanCache($group = null, $client_id = 0)
-	{
-		parent::cleanCache('com_mywalks');
 	}
 }
