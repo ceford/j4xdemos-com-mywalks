@@ -50,6 +50,7 @@
 			<folder>Controller</folder>
 			<folder>Extension</folder>
 			<folder>forms</folder>
+			<folder>Helper</folder>
 			<folder>Model</folder>
 			<folder>Service</folder>
 			<folder>services</folder>

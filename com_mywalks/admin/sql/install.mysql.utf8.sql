@@ -40,7 +40,8 @@ CREATE TABLE `#__mywalk_dates` (
   `id` int(11) NOT NULL,
   `walk_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `weather` varchar(256) DEFAULT NULL
+  `weather` varchar(256) DEFAULT NULL,
+  `state` TINYINT NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
