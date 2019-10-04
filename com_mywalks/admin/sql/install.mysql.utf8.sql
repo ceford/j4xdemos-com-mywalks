@@ -1,22 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.8.1
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Aug 04, 2019 at 10:54 AM
--- Server version: 5.6.34
--- PHP Version: 7.2.5
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
---
--- Database: `j4x`
---
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `#__mywalks`
@@ -108,4 +89,3 @@ ALTER TABLE `#__mywalks`
 --
 ALTER TABLE `#__mywalk_dates`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-COMMIT;
