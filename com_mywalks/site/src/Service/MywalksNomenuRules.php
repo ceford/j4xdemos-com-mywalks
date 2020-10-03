@@ -104,10 +104,13 @@ class MywalksNomenuRules implements RulesInterface
 			return;
 		}
 		$segments[] = $query['view'] . '-' . $query['id'];
-		$segments[] = $query['slug'];
+		// the last part of the url may be missing
+		if (isset($query['slug'])) {
+			$segments[] = $query['slug'];
+			unset($query['slug']);
+		}
 		unset($query['view']);
 		unset($query['id']);
-		unset($query['slug']);
 	}
 }
 
