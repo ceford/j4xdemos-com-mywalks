@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension type="component" version="4.0" method="install" client="site">
-	<name>Mywalks</name>
+<extension type="component" method="upgrade">
+	<name>com_mywalks</name>
 	<!-- The following elements are optional and free of formatting conttraints -->
 	<creationDate>August 2019</creationDate>
 	<author>Clifford E Ford</author>
@@ -11,7 +11,7 @@
 	<!--  The version string is recorded in the components table -->
 	<version>0.2.0</version>
 	<!-- The description is optional and defaults to the name -->
-	<description>Mywalks Component</description>
+	<description>COM_MYWALKS_XML_DESCRIPTION</description>
 	<namespace path="src">J4xdemos\Component\Mywalks</namespace>
 
 	<install> <!-- Runs on install -->
@@ -53,6 +53,6 @@
 			<language tag="en-GB">language/en-GB/com_mywalks.ini</language>
 			<language tag="en-GB">language/en-GB/com_mywalks.sys.ini</language>
 		</languages>
-		<menu img="class:default" link="option=com_mywalks">Mywalks</menu>
+		<menu img="class:default" link="option=com_mywalks">com_mywalks</menu>
 	</administration>
 </extension>
