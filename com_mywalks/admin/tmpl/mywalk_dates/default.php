@@ -17,7 +17,7 @@ use Joomla\CMS\Router\Route;
 use J4xdemos\Component\Mywalks\Administrator\Helper\MywalksHelper;
 
 HTMLHelper::_('behavior.multiselect');
-HTMLHelper::_('behavior.tabstate');
+//HTMLHelper::_('behavior.tabstate');
 
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
@@ -27,14 +27,14 @@ $states = array (
 		'2' => Text::_('JARCHIVED'),
 		'-2' => Text::_('JTRASHED')
 );
-$editIcon = '<span class="fa fa-pen-square mr-2" aria-hidden="true"></span>';
+$editIcon = '<span class="fa fa-pen-square me-2" aria-hidden="true"></span>';
 $title = MywalksHelper::getWalkTitle($this->state->get('walk_id'))->title;
 $walk_id = $this->state->get('walk_id')
 ?>
 <h3><?php echo Text::_('COM_MYWALKS_MYWALK_DATES_PAGE_TOP') . ' ' . $walk_id . ': ' . $title; ?></h3>
 <form action="<?php echo Route::_('index.php?option=com_mywalks&view=mywalk_dates'); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row">
-        <div class="col-md-12">
+		<div class="col-md-12">
 			<div id="j-main-container" class="j-main-container">
 				<?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
 				<?php if (empty($this->items)) : ?>

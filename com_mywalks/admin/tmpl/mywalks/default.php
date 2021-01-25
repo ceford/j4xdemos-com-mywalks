@@ -22,11 +22,11 @@ $states = array (
 		'2' => Text::_('JARCHIVED'),
 		'-2' => Text::_('JTRASHED')
 );
-$editIcon = '<span class="fa fa-pen-square mr-2" aria-hidden="true"></span>';
+$editIcon = '<span class="fa fa-pen-square me-2" aria-hidden="true"></span>';
 ?>
 <form action="<?php echo Route::_('index.php?option=com_mywalks'); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row">
-        <div class="col-md-12">
+		<div class="col-md-12">
 			<div id="j-main-container" class="j-main-container">
 				<?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
 				<?php if (empty($this->items)) : ?>
