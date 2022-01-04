@@ -137,5 +137,11 @@ class HtmlView extends BaseHtmlView
 				->message('JGLOBAL_CONFIRM_DELETE')
 				->listCheck(true);
 		}
+
+		if ($canDo->get('core.create'))
+		{
+			$toolbar->preferences('com_mywalks');
+		}
+
 	}
 }
