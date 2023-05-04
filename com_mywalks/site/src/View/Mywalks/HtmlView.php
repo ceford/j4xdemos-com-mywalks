@@ -89,6 +89,8 @@ class HtmlView extends BaseHtmlView
 		$this->items      = &$items;
 		$this->params     = &$params;
 		$this->pagination = &$pagination;
+		$this->filterForm    = $this->get('FilterForm');
+		$this->activeFilters = $this->get('ActiveFilters');
 
 		return parent::display($tpl);
 	}

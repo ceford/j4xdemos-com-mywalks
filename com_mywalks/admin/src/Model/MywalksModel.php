@@ -11,15 +11,7 @@ namespace J4xdemos\Component\Mywalks\Administrator\Model;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\Language\Associations;
-use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\ListModel;
-use Joomla\CMS\Plugin\PluginHelper;
-use Joomla\CMS\Table\Table;
-use Joomla\CMS\Workflow\Workflow;
-use Joomla\Component\Content\Administrator\Extension\ContentComponent;
-use Joomla\Utilities\ArrayHelper;
 use Joomla\Database\ParameterType;
 
 /**
@@ -44,7 +36,14 @@ class MywalksModel extends ListModel
 			$config['filter_fields'] = array(
 				'id', 'a.id',
 				'title', 'a.title',
+				'description', 'a.description',
+				'distance', 'a.distance',
+				'toilets', 'a.toilets',
+				'cafe', 'a.cafe',
+				'hills', 'a.hills',
+				'bogs', 'a.bogs',
 				'state', 'a.state',
+				'nvisits',
 			);
 		}
 
@@ -107,29 +106,32 @@ class MywalksModel extends ListModel
 	protected function getListQuery()
 	{
 		// Create a new query object.
-		$db    = $this->getDbo();
+		$db    = $this->getDatabase();
 		$query = $db->getQuery(true);
 
 		// Select the required fields from the table.
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.*, (SELECT count(`date`) from #__mywalk_dates WHERE walk_id = a.id) AS nvisits'
+				'a.*, (SELECT count(' 
+				. $db->quoteName('date') 
+				. ') FROM ' . $db->quoteName('#__mywalk_dates') 
+				. ' WHERE walk_id = a.id) AS nvisits'
 			)
 		);
-		$query->from('#__mywalks AS a');
+		$query->from($db->quoteName('#__mywalks') . ' AS a');
 
 		// Filter by published state
 		$published = (string) $this->getState('filter.published');
 
 		if (is_numeric($published))
 		{
-			$query->where($db->quoteName('a.state') . ' = :published');
-			$query->bind(':published', $published, ParameterType::INTEGER);
+			$query->where($db->quoteName('a.state') . ' = :published')
+			->bind(':published', $published, ParameterType::INTEGER);
 		}
 		elseif ($published === '')
 		{
-			$query->where('(' . $db->quoteName('a.state') . ' = 0 OR ' . $db->quoteName('a.state') . ' = 1)');
+			$query->whereIn($db->quoteName('a.state'), array(0, 1));
 		}
 
 		// Filter by search in title.
@@ -137,15 +139,24 @@ class MywalksModel extends ListModel
 
 		if (!empty($search))
 		{
-			$search = $db->quote('%' . str_replace(' ', '%', $db->escape(trim($search), true) . '%'));
-			$query->where('(a.title LIKE ' . $search . ')');
+			$search = '%' . trim($search) . '%';
+			$query->where($db->quoteName('a.title') . ' LIKE :search')
+			->bind(':search', $search, ParameterType::STRING);
 		}
 
 		// Add the list ordering clause.
 		$orderCol  = $this->state->get('list.ordering', 'a.id');
 		$orderDirn = $this->state->get('list.direction', 'ASC');
 
-		$query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
+		if ($orderCol === 'title') {
+            $ordering = [
+                $db->quoteName('a.title') . ' ' . $db->escape($orderDirn),
+            ];
+        } else {
+            $ordering = $db->escape($orderCol) . ' ' . $db->escape($orderDirn);
+        }
+
+        $query->order($ordering);
 
 		return $query;
 	}

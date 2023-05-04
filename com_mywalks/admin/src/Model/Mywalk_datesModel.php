@@ -119,9 +119,8 @@ class Mywalk_datesModel extends ListModel
 	protected function getListQuery()
 	{
 		// Create a new query object.
-		$db    = $this->getDbo();
+		$db    = $this->getDatabase();
 		$query = $db->getQuery(true);
-		$user  = Factory::getUser();
 
 		// Select the required fields from the table.
 		$query->select(
@@ -130,11 +129,12 @@ class Mywalk_datesModel extends ListModel
 				'a.*'
 			)
 		);
-		$query->from('#__mywalk_dates AS a');
+		$query->from($db->quoteName('#__mywalk_dates') . ' AS a');
 
 		// the walk id should be passed in url or hidden form variables
 		$walk_id     = $this->getState('walk_id');
-		$query->where('walk_id = ' . $walk_id);
+		$query->where($db->quoteName('a.walk_id') . ' = :walk_id')
+		->bind(':walk_id', $walk_id, ParameterType::INTEGER);
 
 		// Filter by published state
 		$published = (string) $this->getState('filter.published');
@@ -146,14 +146,32 @@ class Mywalk_datesModel extends ListModel
 		}
 		elseif ($published === '')
 		{
-			$query->where('(' . $db->quoteName('a.state') . ' = 0 OR ' . $db->quoteName('a.state') . ' = 1)');
+			$query->whereIn($db->quoteName('a.state'), array(0, 1));
+		}
+
+		// Filter by search in date.
+		$search = $this->getState('filter.search');
+
+		if (!empty($search))
+		{
+			$search = '%' . trim($search) . '%';
+			$query->where($db->quoteName('a.weather') . ' LIKE :search')
+			->bind(':search', $search, ParameterType::STRING);
 		}
 
 		// Add the list ordering clause.
 		$orderCol  = $this->state->get('list.ordering', 'a.id');
 		$orderDirn = $this->state->get('list.direction', 'ASC');
 
-		$query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
+		if ($orderCol === 'date') {
+            $ordering = [
+                $db->quoteName('a.date') . ' ' . $db->escape($orderDirn),
+            ];
+        } else {
+            $ordering = $db->escape($orderCol) . ' ' . $db->escape($orderDirn);
+        }
+
+        $query->order($ordering);
 		return $query;
 	}
 

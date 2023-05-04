@@ -36,9 +36,6 @@ $editIcon = '<span class="fa fa-pen-square me-2" aria-hidden="true"></span>';
 					</div>
 				<?php else : ?>
 					<table class="table" id="mywalksList">
-						<caption id="captionTable">
-							<?php echo Text::_('COM_MYWALKS_MYWALKS_TABLE_CAPTION'); ?>, <?php echo Text::_('JGLOBAL_SORTED_BY'); ?>
-						</caption>
 						<thead>
 							<tr>
 								<td style="width:1%" class="text-center">
@@ -57,7 +54,7 @@ $editIcon = '<span class="fa fa-pen-square me-2" aria-hidden="true"></span>';
 									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_DISTANCE', 'a.distance', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" style="width:10%">
-									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_NVISITS', 'a.distance', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_NVISITS', 'nvisits', $listDirn, $listOrder); ?>
 								</th>
 								<th scope="col" style="width:5%" class="d-none d-md-table-cell">
 									<?php echo HTMLHelper::_('searchtools.sort', 'COM_MYWALKS_MYWALKS_LABEL_TOILETS', 'a.toilets', $listDirn, $listOrder); ?>
@@ -85,7 +82,7 @@ $editIcon = '<span class="fa fa-pen-square me-2" aria-hidden="true"></span>';
 								<td class="text-center">
 									<?php echo HTMLHelper::_('grid.id', $i, $item->id); ?>
 								</td>
-								<td class="class="article-status"">
+								<td class="article-status">
 									<?php echo $states[$item->state]; ?>
 								</td>
 								<th scope="row" class="has-context">

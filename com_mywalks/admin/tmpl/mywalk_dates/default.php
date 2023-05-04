@@ -44,9 +44,6 @@ $walk_id = $this->state->get('walk_id')
 					</div>
 				<?php else : ?>
 					<table class="table" id="mywalksList">
-						<caption id="captionTable">
-							<?php echo Text::_('COM_MYWALKS_MYWALK_DATES_TABLE_CAPTION'); ?>, <?php echo Text::_('JGLOBAL_SORTED_BY'); ?>
-						</caption>
 						<thead>
 							<tr>
 								<td style="width:1%" class="text-center">
@@ -106,4 +103,4 @@ $walk_id = $this->state->get('walk_id')
 	</div>
 </form>
 
-<a href="<?php echo Route::_('index.php?option=com_mywalks'); ?>">Back to list of walks</a>
+<a href="<?php echo Route::_('index.php?option=com_mywalks'); ?>"><?php echo Text::_('COM_MYWALKS_WALK_BACK_TO_WALKS'); ?></a>

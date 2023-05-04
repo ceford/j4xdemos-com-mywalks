@@ -11,6 +11,7 @@ namespace J4xdemos\Component\Mywalks\Administrator\Model;
 
 defined('_JEXEC') or die;
 
+use Joomla\Database\ParameterType;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Language\Text;
@@ -46,7 +47,7 @@ class MywalkModel extends AdminModel
 	{
 		if (!empty($record->id))
 		{
-			return Factory::getUser()->authorise('core.delete', 'com_mywalks.mywalks.' . (int) $record->id);
+			return $this->getCurrentUser()->authorise('core.delete', 'com_mywalks.mywalks.' . (int) $record->id);
 		}
 
 		return false;
@@ -63,12 +64,10 @@ class MywalkModel extends AdminModel
 	 */
 	protected function canEditState($record)
 	{
-		$user = Factory::getUser();
-
 		// Check for existing article.
 		if (!empty($record->id))
 		{
-			return $user->authorise('core.edit.state', 'com_mywalks.mywalks.' . (int) $record->id);
+			return $this->getCurrentUser()->authorise('core.edit.state', 'com_mywalks.mywalks.' . (int) $record->id);
 		}
 
 		// Default to component settings if neither article nor category known.
@@ -161,13 +160,14 @@ class MywalkModel extends AdminModel
 	 */
 	public function publish(&$pks, $value = 1) {
 		/* this is a very simple method to change the state of each item selected */
-		$db = $this->getDbo();
+		$db = $this->getDatabase();
 
 		$query = $db->getQuery(true);
 
-		$query->update('`#__mywalks`');
-		$query->set('state = ' . $value);
-		$query->where('id IN (' . implode(',', $pks). ')');
+		$query->update($db->quoteName('#__mywalks'))
+		->set($db->quoteName('state') . ' = :value')
+		->bind(':value', $value , ParameterType::INTEGER)
+		->whereIn($db->quoteName('id'), $pks);
 		$db->setQuery($query);
 		$db->execute();
 	}

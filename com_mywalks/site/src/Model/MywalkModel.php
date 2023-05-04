@@ -11,6 +11,7 @@ namespace J4xdemos\Component\Mywalks\Site\Model;
 
 defined('_JEXEC') or die;
 
+use Joomla\Database\ParameterType;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\ItemModel;
@@ -67,15 +68,16 @@ class MywalkModel extends ItemModel
 
 			try
 			{
-				$db = $this->getDbo();
+				$db = $this->getDatabase();
 				$query = $db->getQuery(true)
 					->select(
 						$this->getState(
 							'item.select', 'a.*'
 						)
 					);
-				$query->from('#__mywalks AS a')
-					->where('a.id = ' . (int) $pk);
+				$query->from($db->quoteName('#__mywalks') . ' AS a')
+					->where($db->quoteName('a.id') . ' = :id')
+					->bind(':id', $pk, ParameterType::INTEGER);
 
 				$db->setQuery($query);
 
@@ -115,12 +117,13 @@ class MywalkModel extends ItemModel
 
 		try
 		{
-			$db = $this->getDbo();
+			$db = $this->getDatabase();
 			$query = $db->getQuery(true)
-			->select('b.*');
-			$query->from('#__mywalk_dates AS b')
-			->where('b.walk_id = ' . (int) $pk);
-			$query->order('`date` DESC');
+			->select('b.*')
+			->from($db->quoteName('#__mywalk_dates') . ' AS b')
+			->where($db->quoteName('b.walk_id') . ' = :id')
+			->bind(':id', $pk, ParameterType::INTEGER)
+			->order($db->quoteName('date') . ' DESC');
 
 			$db->setQuery($query);
 

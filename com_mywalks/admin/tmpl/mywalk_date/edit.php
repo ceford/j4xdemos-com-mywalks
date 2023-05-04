@@ -29,7 +29,6 @@ if (empty($walk_id)) {
 
 // Fieldsets to not automatically render by /layouts/joomla/edit/params.php
 $this->ignore_fieldsets = array('details', 'item_associations', 'jmetadata');
-$this->useCoreUI = true;
 ?>
 
 <form action="<?php echo Route::_('index.php?option=com_mywalks&view=mywalk_date&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="mywalk-dates-form" class="form-validate">

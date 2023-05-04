@@ -119,15 +119,19 @@ class HtmlView extends BaseHtmlView
 		$title = Text::_('COM_MYWALKS_MYWALK_DATE_PAGE_TITLE_' . $title);
 		ToolbarHelper::title($title);
 
-		// For new records, check the create permission.
+		$canDo = ContentHelper::getActions('com_mywalks');
+		if ($canDo->get('core.create'))
+		{
+			$toolbar->apply('mywalk_date.apply');
+			$toolbar->save('mywalk_date.save');
+		}
 		if ($isNew)
 		{
-			$toolbar->apply('mywalk_date.save');
+			$toolbar->cancel('mywalk_date.cancel', 'JTOOLBAR_CANCEL');
 		}
 		else
 		{
-			$toolbar->apply('mywalk_date.apply');
+			$toolbar->cancel('mywalk_date.cancel', 'JTOOLBAR_CLOSE');
 		}
-		$toolbar->cancel('mywalk_date.cancel', 'JTOOLBAR_CLOSE');
 	}
 }

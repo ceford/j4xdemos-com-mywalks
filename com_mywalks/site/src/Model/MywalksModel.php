@@ -11,8 +11,8 @@ namespace J4xdemos\Component\Mywalks\Site\Model;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\Database\ParameterType;
 
 /**
  * This models supports retrieving lists of articles.
@@ -36,6 +36,7 @@ class MywalksModel extends ListModel
 			$config['filter_fields'] = array(
 				'id', 'a.id',
 				'title', 'a.title',
+				'distance', 'a.distance',
 			);
 		}
 
@@ -58,39 +59,13 @@ class MywalksModel extends ListModel
 	 *
 	 * @since   3.0.1
 	 */
-	protected function populateState($ordering = 'ordering', $direction = 'ASC')
+	protected function populateState($ordering = 'a.id', $direction = 'ASC')
 	{
-		$app = Factory::getApplication();
+		$search = $this->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
+		$this->setState('filter.search', $search);
 
-		// List state information
-		$value = $app->input->get('limit', $app->get('list_limit', 0), 'uint');
-		$this->setState('list.limit', $value);
-
-		$value = $app->input->get('limitstart', 0, 'uint');
-		$this->setState('list.start', $value);
-
-		$orderCol = $app->input->get('filter_order', 'a.id');
-
-		if (!in_array($orderCol, $this->filter_fields))
-		{
-			$orderCol = 'a.id';
-		}
-
-		$this->setState('list.ordering', $orderCol);
-
-		$listOrder = $app->input->get('filter_order_Dir', 'ASC');
-
-		if (!in_array(strtoupper($listOrder), array('ASC', 'DESC', '')))
-		{
-			$listOrder = 'ASC';
-		}
-
-		$this->setState('list.direction', $listOrder);
-
-		$params = $app->getParams();
-		$this->setState('params', $params);
-
-		//$this->setState('layout', $app->input->getString('layout'));
+		// List state information.
+		parent::populateState($ordering, $direction);
 	}
 
 	/**
@@ -109,6 +84,7 @@ class MywalksModel extends ListModel
 	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
+		$id .= ':' . $this->getState('filter.search');
 
 		return parent::getStoreId($id);
 	}
@@ -122,11 +98,9 @@ class MywalksModel extends ListModel
 	 */
 	protected function getListQuery()
 	{
-		// Get the current user for authorisation checks
-		$user = Factory::getUser();
 
 		// Create a new query object.
-		$db    = $this->getDbo();
+		$db    = $this->getDatabase();
 		$query = $db->getQuery(true);
 
 		// Select the required fields from the table.
@@ -134,44 +108,39 @@ class MywalksModel extends ListModel
 			$this->getState(
 				'list.select',
 				'a.*,
-				(SELECT MAX(`date`) from #__mywalk_dates WHERE walk_id = a.id) AS last_visit,
-				(SELECT count(`date`) from #__mywalk_dates WHERE walk_id = a.id) AS nvisits
-				')
+				(SELECT MAX(' . $db->quoteName('date') 
+				. ') FROM ' . $db->quoteName('#__mywalk_dates') 
+				. ' WHERE ' . $db->quoteName('walk_id') . ' = ' . $db->quoteName('a.id') . ') AS last_visit,
+				(SELECT count(' . $db->quote('date') . ') FROM ' . $db->quoteName('#__mywalk_dates') 
+				. ' WHERE ' . $db->quoteName('walk_id') . ' = ' . $db->quoteName('a.id') . ') AS nvisits'
+				)
 		);
-		$query->from('#__mywalks AS a');
+		$query->from($db->quoteName('#__mywalks') . ' AS a');
 
-		$params      = $this->getState('params');
+		// Filter by search in title.
+		$search = $this->getState('filter.search');
+
+		if (!empty($search))
+		{
+			$search = '%' . trim($search) . '%';
+			$query->where($db->quoteName('a.title') . ' LIKE :search')
+			->bind(':search', $search, ParameterType::STRING);
+		}
 
 		// Add the list ordering clause.
-		$query->order($this->getState('list.ordering', 'a.id') . ' ' . $this->getState('list.direction', 'ASC'));
+		$orderCol  = $this->state->get('list.ordering', 'a.id');
+		$orderDirn = $this->state->get('list.direction', 'ASC');
+
+		if ($orderCol === 'title') {
+            $ordering = [
+                $db->quoteName('a.title') . ' ' . $db->escape($orderDirn),
+            ];
+        } else {
+            $ordering = $db->escape($orderCol) . ' ' . $db->escape($orderDirn);
+        }
+
+        $query->order($ordering);
 
 		return $query;
-	}
-
-	/**
-	 * Method to get a list of walks.
-	 *
-	 * Overridden to inject convert the attribs field into a \JParameter object.
-	 *
-	 * @return  mixed  An array of objects on success, false on failure.
-	 *
-	 * @since   1.6
-	 */
-	public function getItems()
-	{
-		$items  = parent::getItems();
-		return $items;
-	}
-
-	/**
-	 * Method to get the starting number of items for the data set.
-	 *
-	 * @return  integer  The starting number of items available in the data set.
-	 *
-	 * @since   3.0.1
-	 */
-	public function getStart()
-	{
-		return $this->getState('list.start');
 	}
 }

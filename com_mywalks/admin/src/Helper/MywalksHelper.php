@@ -12,6 +12,7 @@ namespace J4xdemos\Component\Mywalks\Administrator\Helper;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\Database\ParameterType;
 
 /**
  * Mywalks component helper.
@@ -29,9 +30,10 @@ class MywalksHelper
 		}
 		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('title');
-		$query->from('#__mywalks');
-		$query->where('id = ' . $id);
+		$query->select($db->quoteName('title'))
+		->from($db->quoteName('#__mywalks'))
+		->where('id = :id')
+		->bind(':id', $id, ParameterType::INTEGER);
 		$db->setQuery($query);
 		return $db->loadObject();
 	}

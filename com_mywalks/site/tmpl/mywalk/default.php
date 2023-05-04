@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 
 //use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 
 ?>
 <div class="page-header">
@@ -23,7 +24,6 @@ use Joomla\CMS\Language\Text;
 
 <div class="table-responsive">
   <table class="table table-striped">
-  <caption><?php echo Text::_('COM_MYWALKS_WALK_REPORTS'); ?></caption>
   <thead>
     <tr>
  		<th scope="col"><?php echo Text::_('COM_MYWALKS_WALK_DATE'); ?></th>
@@ -40,3 +40,5 @@ use Joomla\CMS\Language\Text;
 	</tbody>
   </table>
 </div>
+
+<a href="<?php echo Route::_('index.php?option=com_mywalks'); ?>"><?php echo Text::_('COM_MYWALKS_WALK_BACK_TO_WALKS'); ?></a>

@@ -11,25 +11,15 @@ namespace J4xdemos\Component\Mywalks\Administrator\Model;
 
 defined('_JEXEC') or die;
 
+use Joomla\Database\ParameterType;
 use Joomla\CMS\Factory;
-use Joomla\CMS\Form\Form;
-use Joomla\CMS\Language\LanguageHelper;
+//use Joomla\CMS\Form\Form;
 use Joomla\CMS\Language\Text;
-//use Joomla\CMS\Log\Log;
 use Joomla\CMS\MVC\Model\AdminModel;
-//use Joomla\CMS\Plugin\PluginHelper;
-//use Joomla\CMS\String\PunycodeHelper;
-//use Joomla\CMS\Table\Category;
-use Joomla\CMS\Table\Table;
-use Joomla\CMS\Table\TableInterface;
-//use Joomla\CMS\UCM\UCMType;
-//use Joomla\CMS\Workflow\Workflow;
+//use Joomla\CMS\Table\Table;
+//use Joomla\CMS\Table\TableInterface;
 use J4xdemos\Component\Mywalks\Administrator\Extension\MywalksComponent;
-//use Joomla\Component\Content\Administrator\Helper\ContentHelper;
-//use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
-//use Joomla\Component\Workflow\Administrator\Table\StageTable;
-use Joomla\Registry\Registry;
-//use Joomla\Utilities\ArrayHelper;
+//use Joomla\Registry\Registry;
 
 /**
  * Item Model for a single walk.
@@ -60,7 +50,7 @@ class Mywalk_dateModel extends AdminModel
 	{
 		if (!empty($record->id))
 		{
-			return Factory::getUser()->authorise('core.delete', 'com_mywalks.mywalks.' . (int) $record->id);
+			return $this->getCurrentUser()->authorise('core.delete', 'com_mywalks.mywalks.' . (int) $record->id);
 		}
 
 		return false;
@@ -77,12 +67,10 @@ class Mywalk_dateModel extends AdminModel
 	 */
 	protected function canEditState($record)
 	{
-		$user = Factory::getUser();
-
 		// Check for existing article.
 		if (!empty($record->id))
 		{
-			return $user->authorise('core.edit.state', 'com_mywalks.mywalks.' . (int) $record->id);
+			return $this->getCurrentUser()->authorise('core.edit.state', 'com_mywalks.mywalks.' . (int) $record->id);
 		}
 
 		// Default to component settings if neither article nor category known.
@@ -126,17 +114,17 @@ class Mywalk_dateModel extends AdminModel
 	 */
 	public function publish(&$pks, $value = 1) {
 		/* this is a very simple method to change the state of each item selected */
-		$db = $this->getDbo();
+		$db = $this->getDatabase();
 
 		$query = $db->getQuery(true);
 
-		$query->update('`#__mywalk_dates`');
-		$query->set('state = ' . $value);
-		$query->where('id IN (' . implode(',', $pks). ')');
+		$query->update($db->quoteName('#__mywalk_dates'))
+		->set($db->quoteName('state') . ' = :state')
+		->bind(':state', $state, ParameterType::INTEGER)
+		->whereIN($db->quoteName('id'), $pks);
 		$db->setQuery($query);
 		$db->execute();
 	}
-
 
 	/**
 	 * Method to get the record form.

@@ -93,25 +93,25 @@ class HtmlView extends BaseHtmlView
 		Factory::getApplication()->input->set('hidemainmenu', true);
 		$isNew      = ($this->item->id == 0);
 
-		$canDo = ContentHelper::getActions('com_mywalks');
-
 		$toolbar = Toolbar::getInstance();
 
 		ToolbarHelper::title(
 			Text::_('COM_MYWALKS_MYWALK_PAGE_TITLE_' . ($isNew ? 'ADD_WALK' : 'EDIT_WALK'))
 		);
 
+		$canDo = ContentHelper::getActions('com_mywalks');
 		if ($canDo->get('core.create'))
 		{
-			if ($isNew)
-			{
-				$toolbar->apply('mywalk.save');
-			}
-			else
-			{
-				$toolbar->apply('mywalk.apply');
-			}
+			$toolbar->apply('mywalk.apply');
+			$toolbar->save('mywalk.save');
 		}
-		$toolbar->cancel('mywalk.cancel', 'JTOOLBAR_CLOSE');
+		if ($isNew)
+		{
+			$toolbar->cancel('mywalk.cancel', 'JTOOLBAR_CANCEL');
+		}
+		else
+		{
+			$toolbar->cancel('mywalk.cancel', 'JTOOLBAR_CLOSE');
+		}
 	}
 }

@@ -1,8 +1,9 @@
 # Joomla 4x Example Component and Tutorial - Mywalks
 
-A component prepared at the Joomla 4.0 Alpha stage for 
-developer demonstration and tutorial purposes. 
-It manages and displays a list of walks.
+A component prepared in 2019 at the Joomla 4.0 Alpha stage for 
+developer demonstration and tutorial purposes. Updated in 2023
+at the 4.3.1 stage with bug fixes and improvements. The component 
+manages and displays a list of walks.
 
 This is not intended to be a Production component.
 

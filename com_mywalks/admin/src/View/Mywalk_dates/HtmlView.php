@@ -98,7 +98,6 @@ class HtmlView extends BaseHtmlView
 	protected function addToolbar()
 	{
 		$canDo = ContentHelper::getActions('com_mywalks');
-		$user  = Factory::getUser();
 
 		$toolbar = Toolbar::getInstance('toolbar');
 

@@ -9,7 +9,7 @@
 	<copyright>Copyright (C) 2019 Clifford E Ford, All rights reserved.</copyright>
 	<license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
 	<!--  The version string is recorded in the components table -->
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>COM_MYWALKS_XML_DESCRIPTION</description>
 	<namespace path="src">J4xdemos\Component\Mywalks</namespace>
