@@ -13,7 +13,10 @@ Joomla 4. It should not install or work on earlier Joomla versions.
 
 ### Installing
 
-Download the zip file and install it in Joomla 4.
+Download the zip file and install it in Joomla 4. The initial 
+installation may show the success message as an all capitals
+string key. Just look for the Mywalks menu item under Components
+in the Joomla Administrator menu.
 
 ### Documentation
 

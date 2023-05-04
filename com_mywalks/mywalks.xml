@@ -31,6 +31,7 @@
 		in this section are copied from /site/ in the package -->
 
 	<files folder="site">
+		<folder>forms</folder>
 		<folder>src</folder>
 		<folder>tmpl</folder>
 	</files>
