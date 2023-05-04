@@ -6,7 +6,7 @@
 	<author>Clifford E Ford</author>
 	<authorEmail>cliff@ford.myzen.co.uk</authorEmail>
 	<authorUrl>http://www.fford.me.uk/</authorUrl>
-	<copyright>Copyright (C) 2019 Clifford E Ford, All rights reserved.</copyright>
+	<copyright>Copyright (C) 2019-2023 Clifford E Ford, All rights reserved.</copyright>
 	<license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
 	<!--  The version string is recorded in the components table -->
 	<version>0.3.0</version>
@@ -32,28 +32,22 @@
 
 	<files folder="site">
 		<folder>forms</folder>
+		<folder>language</folder>
 		<folder>src</folder>
 		<folder>tmpl</folder>
 	</files>
-	
-	<languages folder="site">
-		<language tag="en-GB">language/en-GB/com_mywalks.ini</language>
-	</languages>
 	
 	<administration>
 		<files folder="admin">
 			<file>access.xml</file>
 			<file>config.xml</file>
 			<folder>forms</folder>
+			<folder>language</folder>
 			<folder>services</folder>
 			<folder>sql</folder>
 			<folder>src</folder>
 			<folder>tmpl</folder>
 		</files>
-		<languages folder="admin">
-			<language tag="en-GB">language/en-GB/com_mywalks.ini</language>
-			<language tag="en-GB">language/en-GB/com_mywalks.sys.ini</language>
-		</languages>
 		<menu img="class:default" link="option=com_mywalks">com_mywalks</menu>
 	</administration>
 </extension>
