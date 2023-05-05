@@ -12,11 +12,8 @@ namespace J4xdemos\Component\Mywalks\Site\View\Mywalks;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
-//use Joomla\CMS\HTML\HTMLHelper;
-//use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\GenericDataException;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-//use Joomla\CMS\Router\Route;
 
 /**
  * Walks List View class
@@ -61,36 +58,27 @@ class HtmlView extends BaseHtmlView
 	 * Method to display the view.
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
-	 *
+
 	 * @return  mixed  \Exception on failure, void on success.
 	 *
 	 * @since   1.6
 	 */
 	public function display($tpl = null)
 	{
-		$app    = Factory::getApplication();
-		$params = $app->getParams();
-
-		// Get some data from the models
-		$state      = $this->get('State');
-		$items      = $this->get('Items');
-		$pagination = $this->get('Pagination');
-
+		// Get data from the model.
+		$this->state      = $this->get('State');
+		$this->items      = $this->get('Items');
+		$this->filterForm    = $this->get('FilterForm');
+		$this->activeFilters = $this->get('ActiveFilters');
+		$this->pagination = $this->get('Pagination');
 		// Flag indicates to not add limitstart=0 to URL
-		$pagination->hideEmptyLimitstart = true;
+		$this->pagination->hideEmptyLimitstart = true;
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
 			throw new GenericDataException(implode("\n", $errors), 500);
 		}
-
-		$this->state      = &$state;
-		$this->items      = &$items;
-		$this->params     = &$params;
-		$this->pagination = &$pagination;
-		$this->filterForm    = $this->get('FilterForm');
-		$this->activeFilters = $this->get('ActiveFilters');
 
 		return parent::display($tpl);
 	}

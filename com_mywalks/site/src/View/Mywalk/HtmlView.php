@@ -11,8 +11,6 @@ namespace J4xdemos\Component\Mywalks\Site\View\Mywalk;
 
 defined('_JEXEC') or die;
 
-//use Joomla\CMS\HTML\HTMLHelper;
-//use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\GenericDataException;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 
@@ -38,6 +36,13 @@ class HtmlView extends BaseHtmlView
 	 * @since  1.6
 	 */
 	protected $item;
+
+	/**
+	 * The list of visit reports/visit dates for this walk
+	 *
+	 * @var    \JObject
+	 * @since  1.6
+	 */
 	protected $reports;
 
 	/**
@@ -49,13 +54,9 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null)
 	{
-		$state      = $this->get('State');
-		$item       = $this->get('Item');
-		$reports    = $this->get('Reports');
-
-		$this->state       = &$state;
-		$this->item        = &$item;
-		$this->reports     = &$reports;
+		$this->state      = $this->get('State');
+		$this->item       = $this->get('Item');
+		$this->reports    = $this->get('Reports');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))

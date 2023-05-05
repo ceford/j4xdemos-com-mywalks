@@ -18,9 +18,8 @@ use J4xdemos\Component\Mywalks\Site\Helper\RouteHelper as MywalksHelperRoute;
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
 
-HTMLHelper::_('behavior.core');
-
 ?>
+
 <h1><?php echo Text::_('COM_MYWALKS_LIST_PAGE_HEADING'); ?></h1>
 
 <form action="<?php echo Route::_('index.php?option=com_mywalks'); ?>" method="post" name="adminForm" id="adminForm">

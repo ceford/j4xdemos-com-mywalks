@@ -46,13 +46,6 @@ class MywalkModel extends ItemModel
 		// Load state from the request.
 		$pk = $app->input->getInt('id');
 		$this->setState('mywalk.id', $pk);
-
-		$offset = $app->input->getUInt('limitstart');
-		$this->setState('list.offset', $offset);
-
-		// Load the parameters.
-		$params = $app->getParams();
-		$this->setState('params', $params);
 	}
 
 	/**
