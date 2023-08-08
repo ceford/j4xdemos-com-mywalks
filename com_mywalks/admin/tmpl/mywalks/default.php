@@ -23,7 +23,7 @@ $states = array (
 		'-2' => Text::_('JTRASHED')
 );
 $editIcon = '<span class="fa fa-pen-square me-2" aria-hidden="true"></span>';
-?>A1111 
+?>A1111 2
 <form action="<?php echo Route::_('index.php?option=com_mywalks'); ?>" method="post" name="adminForm" id="adminForm">
 	<?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
 	<?php if (empty($this->items)) : ?>
@@ -31,7 +31,7 @@ $editIcon = '<span class="fa fa-pen-square me-2" aria-hidden="true"></span>';
 			<span class="fa fa-info-circle" aria-hidden="true"></span><span class="sr-only"><?php echo Text::_('INFO'); ?></span>
 			<?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
 		</div>
-	<?php else : ?>
+	<?php else : ?>aaaaaa1
 		<table class="table" id="mywalksList">
 			<thead>
 				<tr>
