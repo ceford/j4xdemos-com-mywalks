@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace J4xdemos\Component\Mywalks\Site\Service;
+namespace itconnect\Component\Mywalks\Site\Service;
 
 defined('_JEXEC') or die;
 
@@ -18,7 +18,7 @@ use Joomla\CMS\Component\Router\RouterView;
 use Joomla\CMS\Component\Router\RouterViewConfiguration;
 use Joomla\CMS\Component\Router\Rules\MenuRules;
 //use Joomla\CMS\Component\Router\Rules\NomenuRules;
-use J4xdemos\Component\Mywalks\Site\Service\MywalksNomenuRules as NomenuRules;
+use itconnect\Component\Mywalks\Site\Service\MywalksNomenuRules as NomenuRules;
 use Joomla\CMS\Component\Router\Rules\StandardRules;
 use Joomla\CMS\Menu\AbstractMenu;
 use Joomla\Database\DatabaseInterface;

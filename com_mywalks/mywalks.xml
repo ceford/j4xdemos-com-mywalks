@@ -12,7 +12,7 @@
 	<version>0.3.0</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>COM_MYWALKS_XML_DESCRIPTION</description>
-	<namespace path="src">J4xdemos\Component\Mywalks</namespace>
+	<namespace path="src">itconnect\Component\Mywalks</namespace>
 
 	<install> <!-- Runs on install -->
 		<sql>

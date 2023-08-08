@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace J4xdemos\Component\Mywalks\Site\Helper;
+namespace itconnect\Component\Mywalks\Site\Helper;
 
 defined('_JEXEC') or die;
 

@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace J4xdemos\Component\Mywalks\Administrator\Model;
+namespace itconnect\Component\Mywalks\Administrator\Model;
 
 defined('_JEXEC') or die;
 
@@ -18,7 +18,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\AdminModel;
 //use Joomla\CMS\Table\Table;
 //use Joomla\CMS\Table\TableInterface;
-use J4xdemos\Component\Mywalks\Administrator\Extension\MywalksComponent;
+use itconnect\Component\Mywalks\Administrator\Extension\MywalksComponent;
 //use Joomla\Registry\Registry;
 
 /**

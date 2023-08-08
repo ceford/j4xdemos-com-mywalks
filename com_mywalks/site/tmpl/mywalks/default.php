@@ -13,7 +13,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
-use J4xdemos\Component\Mywalks\Site\Helper\RouteHelper as MywalksHelperRoute;
+use itconnect\Component\Mywalks\Site\Helper\RouteHelper as MywalksHelperRoute;
 
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
