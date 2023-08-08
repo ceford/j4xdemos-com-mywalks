@@ -23,7 +23,7 @@ $states = array (
 		'-2' => Text::_('JTRASHED')
 );
 $editIcon = '<span class="fa fa-pen-square me-2" aria-hidden="true"></span>';
-?>A1
+?>A1111 
 <form action="<?php echo Route::_('index.php?option=com_mywalks'); ?>" method="post" name="adminForm" id="adminForm">
 	<?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
 	<?php if (empty($this->items)) : ?>
